@@ -1,0 +1,246 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var testimonial = (List<Testimonial>)ViewBag.Testimonials;
+}
+@model IEnumerable<ECommerce.Models.Product>
+
+<!-- Exclusive Offer Section -->
+<div class="row mt-1">
+    <div id="carouselExclusiveOffer" class="carousel carousel-dark slide">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselExclusiveOffer" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselExclusiveOffer" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselExclusiveOffer" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active" data-bs-interval="3000">
+                <a href="">
+                    <img src="https://d2ki7eiqd260sq.cloudfront.net/Kurlon-Mattress-Store-Near-Me-Monsoon-Dream-Offer1d6713da-fd1d-4980-bfa7-8611c122bfee.jpg" class="d-block w-100" alt="...">
+                </a>
+            </div>
+            <div class="carousel-item" data-bs-interval="2000">
+                <a href="">
+                    <img src="https://exergic.in/wp-content/uploads/2022/08/Ranker-Offers-Banner-31st-Aug-01.jpg" class="d-block w-100" alt="...">
+                </a>
+            </div>
+            <div class="carousel-item">
+                <a href="">
+                    <img src="https://png.pngtree.com/png-clipart/20230104/original/pngtree-happy-diwali-offers-banner-with-diya-decoration-png-image_8866215.png" class="d-block w-100" alt="...">
+                </a>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExclusiveOffer" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExclusiveOffer" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+<!-- Top Selling Section -->
+
+<div class="row mt-5 ps-2 pe-2">
+    <h4>Top Selling</h4>
+</div>
+<div class="row ps-2 pe-2">
+    <!-- Card -->
+    @foreach (var item in Model)
+    {
+        <!-- Card -->
+        <div class="col-lg-2 col-md-3 col-4 mb-4">
+            <div class="card home-card">
+                <a asp-controller="Home" asp-action="ProductDetail" asp-route-id="@item.ProductId" class="text-decoration-none text-black">
+                    <!-- Image -->
+                    <img src="~/assets/product/@Html.DisplayFor(modelItem => item.ImageUrl)" class="card-img-top img-fluid" alt="Card Image">
+                    <!-- Card Body -->
+
+                </a>
+                <div class="card-body">
+                    <p class="card-title fw-bold text-center text-truncate">
+                        @Html.DisplayFor(modelItem => item.ProductName)
+                    </p>
+                    <p class="card-text text-center">
+                        Rs. @Html.DisplayFor(modelItem => item.Price)
+                        <br>
+                        @if (item.StockQuantity > 0)
+                        {
+                            <button class="btn btn-sm cart-button">Add to Cart</button>
+                        }
+                        else
+                        {
+                            <button class="btn btn-sm text-danger border-none bg-transparent">
+                                Out of Stock
+                            </button>
+                        }
+                    </p>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+
+<!-- Exclusive Offer Section -->
+<div class="row mt-5 mb-5">
+    <div id="carouselNewArrival" class="carousel carousel-dark slide">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselNewArrival" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselNewArrival" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselNewArrival" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active" data-bs-interval="3000">
+                <a href="">
+                    <img src="https://d2ki7eiqd260sq.cloudfront.net/Kurlon-Mattress-Store-Near-Me-Monsoon-Dream-Offer1d6713da-fd1d-4980-bfa7-8611c122bfee.jpg" class="d-block w-100" alt="...">
+                </a>
+            </div>
+            <div class="carousel-item" data-bs-interval="2000">
+                <a href="">
+                    <img src="https://exergic.in/wp-content/uploads/2022/08/Ranker-Offers-Banner-31st-Aug-01.jpg" class="d-block w-100" alt="...">
+                </a>
+            </div>
+            <div class="carousel-item">
+                <a href="">
+                    <img src="https://png.pngtree.com/png-clipart/20230104/original/pngtree-happy-diwali-offers-banner-with-diya-decoration-png-image_8866215.png" class="d-block w-100" alt="...">
+                </a>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselNewArrival" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselNewArrival" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+
+<!-- New Arrival Section -->
+<div class="row mt-5 ps-2 pe-2">
+    <h4>New Arrivals</h4>
+</div>
+<div class="row ps-2 pe-2">
+    @if (Model != null && Model.Any())
+    {
+        @foreach (var item in Model)
+        {
+            <div class="col-lg-2 col-md-3 col-4 mb-4">
+                <div class="card home-card">
+                    <a href="" class="text-decoration-none text-black">
+                        <img src="~/assets/product/@Html.DisplayFor(modelItem => item.ImageUrl)" class="card-img-top img-fluid" alt="Card Image">
+                    </a>
+                    <div class="card-body">
+                        <p class="card-title fw-bold text-center text-truncate">
+                            @Html.DisplayFor(modelItem => item.ProductName)
+                        </p>
+                        <p class="card-text text-center">
+                            Rs. @Html.DisplayFor(modelItem => item.Price)
+                            <br>
+                            @if (item.StockQuantity > 0)
+                            {
+                                <button class="btn btn-sm cart-button"
+                                        data-product-id="@item.ProductId"
+                                        data-product-name="@item.ProductName"
+                                        data-price="@item.Price">
+                                    Add to Cart
+                                </button>
+                            }
+                            else
+                            {
+                                <button class="btn btn-sm text-danger border-none bg-transparent">
+                                    Out of Stock
+                                </button>
+                            }
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
+
+    }
+    else
+    {
+        <p>No products available</p>
+    }
+</div>
+
+<!-- Reviews Section -->
+<div class="row mt-5 mb-2">
+    <h4>Testimonials</h4>
+</div>
+<div class="row">
+    <div id="reviewsCarousel" class="carousel carousel-dark slide">
+        <div class="carousel-inner text-center">
+            <div class="carousel-item active" data-bs-interval="10000">
+                <div class="container">
+                    <div class="row">
+                        @foreach (var test in testimonial.Take(3))
+                        {
+                            <div class="col-md-4 col-4">
+                                <img class="rounded-circle shadow-1-strong mb-4 reviewer"
+                                     src="~/assets/testimonial/@test.Thumbnail" alt="avatar" />
+                                <h5 class="mb-3">@test.Name</h5>
+                                <p class="text-muted">
+                                    <i class="fas fa-quote-left pe-2"></i>
+                                    @test.Description
+                                </p>
+                                <ul class="list-unstyled d-flex justify-content-center text-warning mb-0">
+                                    @for (int i = 1; i <= test.Rate; i++)
+                                    {
+                                        <li><i class="fas fa-star fa-sm"></i></li>
+                                    }
+                                    @for (int i = 1; i <= 5 - test.Rate; i++)
+                                    {
+                                        <li><i class="fas fa-star fa-sm text-secondary"></i></li>
+                                    }
+                                </ul>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item" data-bs-interval="2000">
+                <div class="container">
+                    <div class="row">
+                        @for (int i = 3; i < testimonial.Count(); i++)
+                        {
+                            <div class="col-md-4 col-4">
+                                <img class="rounded-circle shadow-1-strong mb-4 reviewer"
+                                     src="~/assets/testimonial/@testimonial[i].Thumbnail" alt="avatar" />
+                                <h5 class="mb-3">@testimonial[i].Name</h5>
+                                <p class="text-muted">
+                                    <i class="fas fa-quote-left pe-2"></i>
+                                    @testimonial[i].Description
+                                </p>
+                                <ul class="list-unstyled d-flex justify-content-center text-warning mb-0">
+                                    @for (int j = 1; j <= testimonial[i].Rate; j++)
+                                    {
+                                        <li><i class="fas fa-star fa-sm"></i></li>
+                                    }
+                                    @for (int j = 1; j <= 5 - testimonial[i].Rate; j++)
+                                    {
+                                        <li><i class="fas fa-star fa-sm text-secondary"></i></li>
+                                    }
+                                </ul>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#reviewsCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#reviewsCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>

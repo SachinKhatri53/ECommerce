@@ -1,0 +1,29 @@
+﻿<div class="modal fade show" id="transactionCancelModal" tabindex="-1" aria-labelledby="transactionCancelModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="cartModalLabel">Checkout Information</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-danger">
+                Transaction Cancelled.
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <a asp-action="Index" asp-controller="Home" class="btn btn-primary btn-sm">Go To Homepage</a>
+                <a asp-action="Index" asp-controller="Checkout" class="btn btn-primary btn-sm">Back</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+        var transactionCancelModal = new bootstrap.Modal(document.getElementById('transactionCancelModal'), {
+        keyboard: false,
+        backdrop: 'static'
+        });
+        transactionCancelModal.show();
+        });
+    </script>
+                 }

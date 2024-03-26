@@ -1,0 +1,46 @@
+﻿@using ECommerce.Services;
+@inject ProductService _productService
+@model List<Orders>
+@{
+    ViewData["Title"] = "Orders - List";
+}
+@{
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+
+<h4 class="text-center">List of Orders</h4>
+<div class="table-responsive">
+    <table class="table table-hover bg-light">
+        <thead>
+            <tr>
+                <th>Order Date</th>
+                <th>Shipping Name</th>
+                <th>Product Name</th>
+                <th>Quantity</th>
+                <th>Shipping Address</th>
+                <th>Payment Method</th>
+                <th>Status</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                @foreach (var orderItem in item.OrderItems)
+                {
+                    <tr>
+                        <td>@item.FormattedOrderDate</td>
+                        <td>@item.ShippingName</td>
+                        <td>@_productService.GetProductNameById(orderItem.ProductId)</td>
+                        <td>@orderItem.Quantity</td>
+                        <td>@item.CompleteAddress</td>
+                        <td>@item.PaymentMethod</td>
+                        <td>@item.Status</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+

@@ -1,0 +1,63 @@
+﻿@model ECommerce.Models.Product
+
+@{
+    ViewData["Title"] = "Product - Detail";
+}
+@{
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+<div class="container p-5 bg-light">
+    <div class="row">
+        <a asp-action="Index" class="btn btn-sm create-button w-25"><i class="fa-solid fa-arrow-left"></i><span class="ms-2">Back to List</span></a>
+    </div>
+    <div class="row text-center">
+        <h4>@Model.ProductName</h4>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-md-4 p-md-2">
+            <img src="~/assets/product/@Model.ImageUrl" class="img-fluid img-thumbnail p-md-2">
+        </div>
+        <div class="col-md-8">
+            <div class="row">
+                <div class="p-md-3">
+                    <h6>Description</h6>
+                    <p>
+                        @Model.Description
+                    </p>
+                </div>
+                <div class="p-md-3">
+                    <table class="table table-borderless">
+                        <tr>
+                            <th class="">Stock</th>
+
+                            @if (Model.StockQuantity > 0)
+                            {
+                                <td class="text-success fw-bold">@Model.StockQuantity</td>
+                            }
+                            else
+                            {
+                                <td class="text-danger fw-bold">@Model.StockQuantity</td>
+                            }
+                        </tr>
+                        <tr>
+                            <th>Category</th>
+                            <td>@Model.Category.CategoryName</td>
+                        </tr>
+                        <tr>
+                            <th>Price</th>
+                            <td>@Model.Price</td>
+                        </tr>
+                        <tr>
+                            <th>Brand</th>
+                            <td>@Model.Brand</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-5 d-flex justify-content-center">
+        <a asp-action="Edit" asp-route-id="@Model?.ProductId" class="btn btn-sm create-button w-25 me-5"><i class="fa-regular fa-pen-to-square"></i><span class="ms-2">Edit</span></a>
+    </div>
+</div>

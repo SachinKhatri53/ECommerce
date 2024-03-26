@@ -1,0 +1,72 @@
+﻿@model IEnumerable<ECommerce.Models.Category>
+
+@{
+    ViewData["Title"] = "Admin - Categories";
+}
+@{
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+<h4 class="text-center">List of Categories</h4>
+<p class="text-end">
+    <a asp-action="Create" class="btn btn-sm create-button"><i class="fa-solid fa-plus"></i><span class="ms-2">Add New</span></a>
+</p>
+<div class="table-responsive">
+    <table class="table table-hover bg-light">
+        <thead>
+            <tr>
+                <th>
+                    Category Name
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Description)
+                </th>
+                <th colspan="3">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CategoryName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        <a asp-action="Details" asp-route-id="@item.CategoryId"><i class="fa-regular fa-eye text-info"></i></a>
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.CategoryId"><i class="fa-regular fa-pen-to-square text-primary"></i></a>
+                    </td>
+                    <td>
+                        <a href="" class="delete-category" data-bs-toggle="modal" data-bs-target="#deleteCategoryModal" data-category-id="@item.CategoryId">
+                            <i class="fa-regular fa-trash-can text-danger"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<!-- Delete Category Modal -->
+<div class="modal fade" id="deleteCategoryModal" tabindex="-1" role="dialog" aria-labelledby="deleteCategoryModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteCategoryModalLabel">Confirm Delete</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                </button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this category?
+                <p class="text-danger fw-bold">All products related to this category will also be deleted.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-sm text-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-ban"></i><span class="ms-2">Cancel</span></button>
+                <button type="button" class="btn btn-sm text-danger" id="categoryDeleteButton"><i class="fa-regular fa-trash-can"></i><span class="ms-2">Delete</span></button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,92 @@
+﻿@model IEnumerable<ECommerce.Models.Deal>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+<h4 class="text-center">List of Deals</h4>
+
+<p class="text-end">
+    <a asp-action="Create" class="btn btn-sm create-button"><i class="fa-solid fa-plus"></i><span class="ms-2">Add New</span></a>
+</p>
+@if (Model.Count() < 1)
+{
+    <p class="text-center text-secondary">There are no available deals.</p>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table table-hover bg-light">
+            <thead>
+                <tr>
+                    <th>
+                        Product
+                    </th>
+                    <th>
+                        Deal Price
+                    </th>
+                    <th>
+                        Start Date
+                    </th>
+                    <th>
+                        End Date
+                    </th>
+                    <th>
+                        Deal Thumbnail
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Product.ProductName)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DealPrice)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FormattedStartDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FormattedEndDate)
+                        </td>
+                        <td>
+                            <img src="~/assets/deal/@Html.DisplayFor(modelItem => item.DealThumbnail)" height="50" width="100" />
+                        </td>
+                        <td>
+                            <a asp-action="Details" asp-route-id="@item.DealId"><i class="fa-regular fa-eye text-info"></i></a> |
+                            <a asp-action="Edit" asp-route-id="@item.DealId"><i class="fa-regular fa-pen-to-square text-primary"></i></a> |
+                            <a class="delete-deal" href="" data-bs-toggle="modal" data-bs-target="#deleteDealConfirmationModal" data-deal-id="@item.DealId">
+                                <i class="fa-regular fa-trash-can text-danger"></i>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div class="modal fade" id="deleteDealConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="deleteDealConfirmationModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteDealConfirmationModalLabel">Confirm Delete</h5>
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to remove this deal?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm text-secondary" data-bs-dismiss="modal"><i class="fa-solid fa-ban"></i><span class="ms-2">Cancel</span></button>
+                    <button type="button" class="btn btn-sm text-danger" id="dealDeleteButton"><i class="fa-regular fa-trash-can"></i><span class="ms-2">Delete</span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+}

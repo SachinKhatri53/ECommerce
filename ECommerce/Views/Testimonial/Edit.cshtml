@@ -1,0 +1,68 @@
+﻿@model ECommerce.Models.Testimonial
+@{
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<div class="container p-4 bg-light">
+    <div class="row">
+        <a asp-action="Index" class="btn btn-sm create-button w-25"><i class="fa-solid fa-arrow-left"></i><span class="ms-2">Back to List</span></a>
+    </div>
+    <div class="row mt-2 text-center">
+        <h4>Edit Tesimonial</h4>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <form asp-action="Edit" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+                <input type="hidden" asp-for="Thumbnail" />
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <textarea asp-for="Description" class="form-control" cols="5" rows="5"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Rate" class="control-label"></label>
+                    <input asp-for="Rate" class="form-control" max="5" min="1" type="number" />
+                    <span asp-validation-for="Rate" class="text-danger"></span>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <div class="form-group mb-3">
+                            <label class="control-label"></label>
+                            <input type="file" id="photoInput" name="photo" accept="image/*" onchange="displaySelectedPhoto()" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div id="selectedPhotoContainer" class="mb-3" style="display:flex; flex-direction: row; align-items:start;">
+                            <img id="selectedPhoto" src="@Url.Content($"~/Assets/Testimonial/{Model.Thumbnail}")" alt="Selected Photo" style="width:100%; max-height: 300px;">
+                            <span onclick="removeSelectedPhoto()" style="cursor: pointer; color: red; font-size: 30px;">
+                                <i class="fa-solid fa-square-xmark"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <input type="submit" value="Update Testimonial" class="btn btn-sm create-button w-100" />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

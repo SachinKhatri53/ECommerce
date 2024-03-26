@@ -1,0 +1,89 @@
+﻿@model IEnumerable<ECommerce.Models.User>
+
+@{
+    ViewData["Title"] = "Index";
+}
+@{
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<!-- Landing Page Content -->
+
+<h4 class="text-center">List of Users</h4>
+
+<p class="text-end">
+    <a asp-action="Create" class="btn btn-sm create-button"><i class="fa-solid fa-plus"></i><span class="ms-2">Add User</span></a>
+</p>
+<div class="table-responsive">
+<table class="table table-hover bg-light">
+    <thead>
+        <tr>
+            <th>
+                Fullname
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+                Date of Birth
+            </th>
+            <th>
+                Registration Date
+            </th>
+            <th>
+                Role
+            </th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody class="table-group-divider">
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @* @Html.DisplayFor(modelItem => item.IsActive) *@
+                    @if (item.IsActive)
+                    {
+                        <span class="text-success fw-bold">Active</span>
+                    }
+                    else
+                    {
+                        <span class="text-secondary fw-bold">Inactive</span>
+                    }
+            </td>
+            <td>
+                @* @Html.DisplayFor(modelItem => item.Birthdate) *@
+                    @Html.DisplayFor(modelItem => item.FormattedBirthdate)
+
+            </td>
+            <td>
+                    @Html.DisplayFor(modelItem => item.FormattedRegistrationDate)
+            </td>
+                <td>
+                    @if (item.IsAdmin)
+                    {
+                        <span class="text-success fw-bold">Admin</span>
+                    }
+                    else
+                    {
+                        <span class="text-secondary fw-bold">User</span>
+                    }
+                </td>
+            <td class="text-center">
+                @* <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> *@
+                <a asp-action="Details" asp-route-id="@item.Id" class="text-success"><i class="fa-solid fa-street-view"></i></a>           
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</div>

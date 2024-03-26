@@ -1,0 +1,335 @@
+﻿@using Newtonsoft.Json;
+@{
+    User currentUser = new ECommerce.Models.User();
+    IHttpContextAccessor httpContextAccessor = new HttpContextAccessor();
+    var userJson = httpContextAccessor.HttpContext.Session.GetString("CurrentUser");
+    if (!String.IsNullOrEmpty(userJson))
+    {
+        currentUser = JsonConvert.DeserializeObject<User>(userJson);
+    }
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ECommerce</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/dashboard.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/ECommerce.styles.css" asp-append-version="true" />
+    <!-- Font Awesome -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"></script>
+</head>
+<body>
+    <!-- ======= Header ======= -->
+    <header id="header" class="header fixed-top d-flex align-items-center">
+        <div class="d-flex align-items-center justify-content-between">
+            <a href="index.html" class="logo d-flex align-items-center text-decoration-none">
+                <img src="assets/logo.png" alt="">
+                <span class="d-none d-lg-block">Ecommerce</span>
+            </a>
+            <i class="fa-solid fa-bars toggle-sidebar-button" onclick="hello()"></i>
+        </div><!-- End Logo -->
+        <nav class="header-nav ms-auto">
+            <ul class="d-flex align-items-center">
+
+                <li class="nav-item d-block d-lg-none">
+                    <a class="nav-link nav-icon search-bar-toggle " href="#">
+                        <i class="bi bi-search"></i>
+                    </a>
+                </li><!-- End Search Icon-->
+
+                <li class="nav-item dropdown">
+
+                    <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+                        <i class="fa-regular fa-bell"></i>
+                        <span class="badge bg-primary badge-number">4</span>
+                    </a><!-- End Notification Icon -->
+
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow notifications">
+                        <li class="dropdown-header">
+                            You have 4 new notifications
+                            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="notification-item">
+                            <div>
+                                <h4>Lorem Ipsum</h4>
+                                <p>Quae dolorem earum veritatis oditseno</p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="notification-item">
+                            <div>
+                                <h4>Atque rerum nesciunt</h4>
+                                <p>Quae dolorem earum veritatis oditseno</p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="notification-item">
+                            <div>
+                                <h4>Sit rerum fuga</h4>
+                                <p>Quae dolorem earum veritatis oditseno</p>
+                            </div>
+                        </li>
+
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="notification-item">
+                            <div>
+                                <h4>Dicta reprehenderit</h4>
+                                <p>Quae dolorem earum veritatis oditseno</p>
+                            </div>
+                        </li>
+                    </ul><!-- End Notification Dropdown Items -->
+
+                </li><!-- End Notification Nav -->
+
+                <li class="nav-item dropdown">
+
+                    <a class="nav-link nav-icon" href="#" data-bs-toggle="dropdown">
+                        <i class="fa-regular fa-message"></i>
+                        <span class="badge bg-success badge-number">3</span>
+                    </a><!-- End Messages Icon -->
+
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow messages">
+                        <li class="dropdown-header">
+                            You have 3 new messages
+                            <a href="#"><span class="badge rounded-pill bg-primary p-2 ms-2">View all</span></a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="message-item">
+                            <a href="#" class="text-decoration-none">
+                                <img src="https://www.npg.org.uk/assets/image-cache//npg-image-crops/square.b7418c92.tw23_jonangelo_molinari_ncuti_gatwa.e6eb8891.jpg"
+                                     alt="" class="rounded-circle">
+                                <div>
+                                    <h4>Maria Hudson</h4>
+                                    <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="message-item">
+                            <a href="#" class="text-decoration-none">
+                                <img src="https://expertphotography.b-cdn.net/wp-content/uploads/2022/03/Portrait-Photographers-Yousuf-Karsh-King.jpg"
+                                     alt="" class="rounded-circle">
+                                <div>
+                                    <h4>Anna Nelson</h4>
+                                    <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li class="message-item">
+                            <a href="#" class="text-decoration-none">
+                                <img src="https://pics.craiyon.com/2023-07-15/dc2ec5a571974417a5551420a4fb0587.webp"
+                                     alt="" class="rounded-circle">
+                                <div>
+                                    <h4>David Muldon</h4>
+                                    <p>Velit asperiores et ducimus soluta repudiandae labore officia est ut...</p>
+                                </div>
+                            </a>
+                        </li>
+                    </ul><!-- End Messages Dropdown Items -->
+
+                </li><!-- End Messages Nav -->
+
+                <li class="nav-item dropdown pe-3">
+
+                    <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
+                        <img src="https://a.storyblok.com/f/191576/1200x800/215e59568f/round_profil_picture_after_.webp"
+                             alt="Profile" class="rounded-circle">
+                        <span class="d-none d-md-block dropdown-toggle ps-2">@currentUser.FullName</span>
+                    </a><!-- End Profile Iamge Icon -->
+
+                    <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
+                        
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" asp-controller="Home" asp-action="Profile">
+                                <i class="bi bi-person"></i>
+                                <span>My Profile</span>
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+
+                        <li>
+                            <a class="dropdown-item d-flex align-items-center" asp-controller="User" asp-action="Logout">
+                                <i class="bi bi-box-arrow-right"></i>
+                                <span>Sign Out</span>
+                            </a>
+                        </li>
+
+                    </ul><!-- End Profile Dropdown Items -->
+                </li><!-- End Profile Nav -->
+
+            </ul>
+        </nav><!-- End Icons Navigation -->
+    </header><!-- End Header -->
+    <!-- ======= Sidebar ======= -->
+    <aside id="sidebar" class="sidebar">
+        <ul class="sidebar-nav" id="sidebar-nav">
+
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="User" asp-action="Index">
+                    <i class="fa-solid fa-braille"></i>
+                    <span class="ms-2">Dashboard</span>
+                </a>
+            </li><!-- End Dashboard Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+                    <i class="fa-solid fa-layer-group"></i><span class="ms-2">Categories</span><i class="fa-solid fa-chevron-down ms-auto"></i>
+                </a>
+                <ul id="components-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a asp-controller="Category" asp-action="Create" class="text-decoration-none">
+                            <i class="fa-solid fa-plus"></i><span class="ms-2">Add New</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Category" asp-action="Index" class="text-decoration-none">
+                            <i class="fa-solid fa-bars-staggered"></i><span class="ms-2">View All</span>
+                        </a>
+                    </li>
+                </ul>
+            </li><!-- End Components Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#product-nav" data-bs-toggle="collapse" href="#">
+                    <i class="fa-brands fa-product-hunt"></i><span class="ms-2">Product</span><i class="fa-solid fa-chevron-down ms-auto"></i>
+                </a>
+                <ul id="product-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a asp-controller="Product" asp-action="Create" class="text-decoration-none">
+                            <i class="fa-solid fa-plus"></i><span class="ms-2">Add New</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Product" asp-action="Index" class="text-decoration-none">
+                            <i class="fa-solid fa-bars-staggered"></i><span class="ms-2">View All</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#deal-nav" data-bs-toggle="collapse" href="#">
+                    <i class="fa-solid fa-hourglass-half"></i><span class="ms-2">Deals</span><i class="fa-solid fa-chevron-down ms-auto"></i>
+                </a>
+                <ul id="deal-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a asp-controller="Deal" asp-action="Create" class="text-decoration-none">
+                            <i class="fa-solid fa-plus"></i><span class="ms-2">Add New</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Deal" asp-action="Index" class="text-decoration-none">
+                            <i class="fa-solid fa-bars-staggered"></i><span class="ms-2">View All</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" data-bs-target="#testimonial-nav" data-bs-toggle="collapse" href="#">
+                    <i class="fa-solid fa-star"></i><span class="ms-2">Testimonial</span><i class="fa-solid fa-chevron-down ms-auto"></i>
+                </a>
+                <ul id="testimonial-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a asp-controller="Testimonial" asp-action="Create" class="text-decoration-none">
+                            <i class="fa-solid fa-plus"></i><span class="ms-2">Add New</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a asp-controller="Testimonial" asp-action="Index" class="text-decoration-none">
+                            <i class="fa-solid fa-bars-staggered"></i><span class="ms-2">View All</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="Order" asp-action="Index">
+                    <i class="fa-solid fa-cart-shopping"></i><span class="ms-2">Orders</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="User" asp-action="Index">
+                    <i class="fa-solid fa-user"></i><span class="ms-2">Users</span>
+                </a>
+            </li>
+            <li class="nav-heading">Pages</li>
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="Home" asp-action="Index" target="_blank">
+                    <i class="fa-solid fa-house"></i><span class="ms-2">Homepage</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-controller="Home" asp-action="About">
+                    <i class="fa-solid fa-circle-info"></i><span class="ms-2">About Us</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-action="Contact" asp-controller="Home">
+                    <i class="fa-solid fa-address-card"></i><span class="ms-2">Contact</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fa-solid fa-shield-halved"></i><span class="ms-2">Privacy</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fa-solid fa-arrow-up-wide-short"></i><span class="ms-2">Terms and Conditions</span>
+                </a>
+            </li>
+            
+            
+        </ul>
+
+    </aside><!-- End Sidebar-->
+
+    <div id="main" class="main">
+        <section class="section dashboard">
+            <main role="main">
+                @RenderBody()
+            </main>
+        </section>
+
+    </div><!-- End #main -->
+
+
+    
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/dashboard.js" asp-append-version="true"></script>
+    <script src="~/js/photo.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

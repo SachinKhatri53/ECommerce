@@ -1,0 +1,248 @@
+﻿@model ECommerce.Models.User
+@{
+    var currentUser = ViewBag.User;
+    if (!String.IsNullOrEmpty(currentUser.FullName)) Layout = "~/Views/Shared/_Layout.cshtml";
+    if (!String.IsNullOrEmpty(currentUser.FullName) && currentUser.IsAdmin) Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+    else Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewData["Title"] = "Profile";
+}
+
+<div class="container p-5">
+    <div class="row">
+        <div class="col-md-4 p-3">
+            <div class="card left-card p-3">
+                <div class="profile-image text-center">
+                    <img src="~/assets/@currentUser.ImageUrl" class="img-fluid rounded-circle">
+                </div>
+                <h4 class="text-center mt-3">@currentUser.FullName</h4>
+            </div>
+
+        </div>
+        <div class="col-md-8 p-3">
+            <div class="card right-card p-3">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" id="profile-details-tab" data-bs-toggle="tab"
+                           href="#profile-details">Profile Details</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="edit-profile-tab" data-bs-toggle="tab" href="#profile-edit">Edit Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="change-password-tab" data-bs-toggle="tab" href="#change-password">Change Password</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content mt-2 p-3">
+                    <!-- Profile Details Tab -->
+                    <div class="tab-pane fade show active" id="profile-details">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <strong>Fullname</strong>
+                            </div>
+                            <div class="col-md-9">
+                                @currentUser.FullName
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-3">
+                                <strong>Email</strong>
+                            </div>
+                            <div class="col-md-9">
+                                @currentUser.Email
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-3">
+                                <strong>Contact</strong>
+                            </div>
+                            <div class="col-md-9">
+                                @currentUser.Contact
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-3">
+                                <strong>Date of Birth</strong>
+                            </div>
+                            <div class="col-md-9">
+                                @currentUser.FormattedBirthdate
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-3">
+                                <strong>Country</strong>
+                            </div>
+                            <div class="col-md-9">
+                                @currentUser.Country
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-3">
+                                <strong>Address</strong>
+                            </div>
+                            <div class="col-md-9">
+                                @currentUser.CompleteAddress
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Edit Profile Tab -->
+                    <div class="tab-pane fade" id="profile-edit">
+                        <form asp-action="Edit" asp-controller="User" id="profile-edit">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="Id" value="@currentUser.Id" />
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <strong>Profile Picture</strong>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="profile-image">
+                                        <img src="~/assets/@currentUser.ImageUrl" class="img-fluid">
+                                    </div>
+                                    <input type="text" asp-for="ImageUrl" class="form-control" value="@currentUser.ImageUrl">
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-3">
+                                    <strong>Fullname</strong>
+                                </div>
+                                <div class="col-md-9">
+                                    <input asp-for="FullName" value="@currentUser.FullName" class="form-control" />
+                                    <span class="text-danger fullname-validation d-none">Fullname cannot be empty.</span>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-3">
+                                    <strong>Email</strong>
+                                </div>
+                                <div class="col-md-9">
+                                    <input asp-for="Email" value="@currentUser.Email" class="form-control" />
+                                    <span class="text-danger email-validation d-none">Email cannot be empty.</span>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-3">
+                                    <strong>Contact</strong>
+                                </div>
+                                <div class="col-md-9">
+                                    <input asp-for="Contact" value="@currentUser.Contact" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-3">
+                                    <strong>Date of Birth</strong>
+                                </div>
+                                <div class="col-md-9">
+                                    <input asp-for="Birthdate" value="@currentUser.Birthdate" class="form-control" />
+                                    <span class="text-danger birthdate-validation d-none">Select date of birth</span>
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-3">
+                                    <strong>Country</strong>
+                                </div>
+                                <div class="col-md-9">
+                                    <input asp-for="Country" value="@currentUser.Country" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-3">
+                                    <strong>State / Province</strong>
+                                </div>
+                                <div class="col-md-9">
+                                    <input asp-for="State" value="@currentUser.State" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-3">
+                                    <strong>City</strong>
+                                </div>
+                                <div class="col-md-9">
+                                    <input asp-for="City" value="@currentUser.City" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-3">
+                                    <strong>Postal Code</strong>
+                                </div>
+                                <div class="col-md-9">
+                                    <input asp-for="Postal" value="@currentUser.Postal" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-3">
+                                    <strong>Street Address</strong>
+                                </div>
+                                <div class="col-md-9">
+                                    <input asp-for="Street" value="@currentUser.Street" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <input type="submit" value="Save Changes" class="btn btn-primary" />
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Change Password Tab -->
+                    <div class="tab-pane fade" id="change-password">
+                        @if (ViewBag.UpdateMessage != null)
+                        {
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                @ViewBag.UpdateMessage
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        }
+                        <form asp-action="Profile">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="Id" value="@currentUser.Id" />
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <strong>Old Password</strong>
+                                </div>
+                                <div class="col-md-9">
+                                    <input type="password" name="oldPassword" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-3">
+                                    <strong>New Password</strong>
+                                </div>
+                                <div class="col-md-9">
+                                    <input type="password" asp-for="Password" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <div class="col-md-3">
+                                    <strong>Confirm New Password</strong>
+                                </div>
+                                <div class="col-md-9">
+                                    <input asp-for="ConfirmPassword" type="password" class="form-control">
+                                </div>
+                            </div>
+                            <div class="row mt-3">
+                                <input type="submit" value="Change Password" onclick="updatePassword()" class="btn btn-sm btn-primary">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script>
+        $(document).ready(function () {
+            var text = $(".alert-warning").text()
+            if (text.length > 0) {
+                $("#profile-details-tab").removeClass("active")
+                $("#profile-details").removeClass("active")
+                $("#profile-details").removeClass("show")
+                $("#change-password").addClass("active")
+                $("#change-password-tab").addClass("active")
+                $("#change-password").addClass("show")
+            }
+        })
+    </script>
+}

@@ -1,0 +1,164 @@
+﻿@{
+    var currentUser = ViewBag.User;
+    if(currentUser == null)
+    {
+        currentUser = new User();
+    }
+    var navigationMenu = ViewBag.NavigationMenu as List<Category>;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ECommerce</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/ECommerce.styles.css" asp-append-version="true" />
+    <!-- Font Awesome -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="bg-light p-3">
+        <div class="container-fluid">
+            <div class="row p-1">
+                <div class="col">
+                    <div class="row">
+                        <div class="col-md-6 text-md-end">Connect with us:</div>
+                        <div class="col-md-6">
+                            <ul class="list-inline text-start">
+                                <li class="list-inline-item">
+                                    <a href="" class="text-decoration-none">
+                                        <i class="fa-brands fa-square-facebook"></i>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="" class="text-decoration-none">
+                                        <i class="fa-brands fa-square-instagram"></i>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="" class="text-decoration-none">
+                                        <i class="fa-brands fa-linkedin"></i>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="" class="text-decoration-none">
+                                        <i class="fa-brands fa-square-x-twitter"></i>
+                                    </a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="" class="text-decoration-none">
+                                        <i class="fa-brands fa-youtube"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col">
+                    <ul class="list-inline text-end">
+                        <li class="list-inline-item"><a asp-controller="Home" asp-action="About" class="text-decoration-none">About Us</a></li>
+                        <li class="list-inline-item"><a asp-controller="Home" asp-action="Contact" class="text-decoration-none">Contact</a></li>
+                        @if (String.IsNullOrEmpty(currentUser.FullName))
+                        {
+                            <li class="list-inline-item"><a asp-controller="User" asp-action="Login" class="text-decoration-none" target="_blank">Login</a></li>
+                        }else{
+                            <li class="list-inline-item"><a asp-controller="User" asp-action="Logout" class="text-decoration-none" target="_blank">Logout</a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+            <div class="row align-items-center">
+                <!-- Logo -->
+                <div class="col-3 col-md-3">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">E-Commerce</a>
+                </div>
+
+                <!-- Search Bar (Centered) -->
+                <div class="col-6 col-md-7 search-bar">
+                    <input type="text" class="form-control" placeholder="Search...">
+                </div>
+
+                <!-- Cart Icon -->
+                <div class="col-1 col-md-1 text-end position-relative">
+                    <a asp-action="Cart" asp-controller="Home">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                        <span class="badge bg-success badge-number">@Html.Raw(ViewBag.CartQuantity)</span>
+                    </a>
+                </div>
+
+                <!-- Profile Icon -->
+                <div class="col-2 col-md-1 text-center">
+                    <div class="profile-icon">
+                        @if (!String.IsNullOrEmpty(currentUser.FullName))
+                        {
+                            <a asp-action="Profile" asp-controller="User" class="text-decoration-none">
+                                <img src="~/assets/@currentUser.ImageUrl" class="img-fluid rounded-circle" />
+                            </a>
+                        }
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col navbar navbar-expand-lg bg-light">
+                    <button class="navbar-toggler fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#categoriesBar"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon">
+                            <i class="fa-solid fa-store"></i>
+                        </span>
+                        Categories
+                    </button>
+                    <div class="collapse navbar-collapse justify-content-center" id="categoriesBar">
+                        <ul class="navbar-nav">
+                            @foreach (var nav in navigationMenu)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link fw-bold" href="">@nav.CategoryName</a>
+                                </li>
+                            }
+                            <li class="nav-item">
+                                <a class="nav-link fw-bold" asp-controller="Home" asp-action="">Browse All Categories</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container-fluid">
+        <main role="main">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top mt-5">
+        <div class="container p-3">
+            <div class="row">
+                <h6 class=" text-center">
+                    &copy; 2024  E-Commerce
+                </h6>
+            </div>
+            <div class="row text-end">
+                <ul class="list-inline">
+                    <li class="list-inline-item">
+                        <a asp-area="" class="text-decoration-none" asp-controller="Home" asp-action="Privacy">Terms and Conditions</a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a asp-area="" class="text-decoration-none" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/js/cart.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

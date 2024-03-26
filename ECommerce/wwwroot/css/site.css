@@ -1,0 +1,108 @@
+html {
+    font-size: 14px;
+    scroll-behavior: smooth;
+}
+
+a {
+    color: #012970 !important;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+    .card:hover {
+        box-shadow: 4px 4px 7px -2px rgba(58,58,58,0.75);
+    }
+
+.reviewer {
+    width: 150px;
+    height: 150px;
+}
+
+
+header .badge-number {
+    position: absolute;
+    inset: -2px -5px auto auto;
+    font-weight: normal;
+    font-size: 12px;
+    padding: 3px 6px;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+    color: #012970 !important;
+}
+
+.cart-button, .buy-button {
+    color: #012970 !important;
+    border: #012970 2px solid !important;
+}
+
+    .cart-button:hover, .buy-button:hover {
+        background-color: #012970 !important;
+        color: white !important;
+    }
+
+.navbar-toggler {
+    color: #012970 !important;
+}
+
+#categoriesBar ul li a {
+    color: #012970;
+}
+
+/*About Us*/
+.about p {
+    text-align: justify;
+}
+
+
+/*Profile*/
+.left-card, .right-card {
+    box-shadow: 2px 2px 14px 0px rgba(229,244,251,1);
+}
+
+.profile-icon {
+    height: 50px;
+}
+
+    .profile-icon img {
+        height: 100%;
+    }
+
+#profile-edit .profile-image {
+    height: 200px;
+}
+
+.profile-image img {
+    height: 100%;
+}
+
+@media only screen and (max-width: 600px) {
+    .reviewer {
+        width: 100px;
+        height: 100px;
+    }
+
+    .profile-icon {
+        height: 40px;
+    }
+}

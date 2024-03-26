@@ -1,0 +1,29 @@
+﻿<div class="modal fade" id="transactionSuccessModal" tabindex="-1" aria-labelledby="transactionSuccessModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="cartModalLabel">Checkout Information</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-success">
+                Your order has been placed successful.
+            </div>
+            <div class="modal-footer d-flex justify-content-center">
+                <a asp-action="Index" asp-controller="Home" class="btn btn-primary btn-sm">Continue Shopping</a>
+                <a asp-action="Index" asp-controller="Home" class="btn btn-primary btn-sm">Track Your Order</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var transactionSuccessModal = new bootstrap.Modal(document.getElementById('transactionSuccessModal'), {
+                keyboard: false,
+                backdrop: 'static'
+            })
+            transactionSuccessModal.show();
+        })
+    </script>
+                 }

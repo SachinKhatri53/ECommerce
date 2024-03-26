@@ -1,0 +1,27 @@
+﻿@model ECommerce.Models.Category
+
+@{
+    ViewData["Title"] = "Category - Detail";
+}
+@{
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+<div class="container p-5 bg-light">
+    <div class="row">
+        <a asp-action="Index" class="btn btn-sm create-button w-25"><i class="fa-solid fa-arrow-left"></i><span class="ms-2">Back to List</span></a>
+    </div>
+    <div class="row text-center">
+        <h4>@Model.CategoryName</h4>
+    </div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+        </dt>
+        <dd class="col-sm-8">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+    </dl>
+    <div class="row mt-5 d-flex justify-content-center">
+        <a asp-action="Edit" asp-route-id="@Model?.CategoryId" class="btn btn-sm create-button w-25 me-5"><i class="fa-regular fa-pen-to-square"></i><span class="ms-2">Edit</span></a>
+    </div>
+</div>

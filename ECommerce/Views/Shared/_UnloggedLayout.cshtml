@@ -1,0 +1,55 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - ECommerce</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/dashboard.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/ECommerce.styles.css" asp-append-version="true" />
+    <!-- Font Awesome -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/js/all.min.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <Header class="p-3">
+        <div class="logo">
+            <a asp-controller="Home" asp-action="Index" class="text-decoration-none">
+            <span>
+                Ecommerce
+            </span>
+            </a>
+        </div>
+    </Header>
+
+    <div class="container-fluid">
+        <main role="main">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top mt-5">
+        <div class="container p-3">
+            <div class="row">
+                <h6 class=" text-center">
+                    &copy; 2024  E-Commerce
+                </h6>
+            </div>
+            <div class="row text-end">
+                <ul class="list-inline">
+                    <li class="list-inline-item">
+                        <a asp-area="" class="text-decoration-none" asp-controller="Home" asp-action="Privacy">Terms and Conditions</a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a asp-area="" class="text-decoration-none" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

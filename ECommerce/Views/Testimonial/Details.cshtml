@@ -1,0 +1,45 @@
+﻿@model ECommerce.Models.Testimonial
+@{
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+@{
+    ViewData["Title"] = "Details";
+}
+<div class="container p-5 bg-light">
+    <div class="row">
+        <a asp-action="Index" class="btn btn-sm create-button w-25"><i class="fa-solid fa-arrow-left"></i><span class="ms-2">Back to List</span></a>
+    </div>
+    <div class="row text-center">
+        <h4>@Model.Name</h4>
+    </div>
+    <hr />
+    <div class="row">
+        <div class="col-md-4 p-md-2">
+            @if (String.IsNullOrEmpty(Model.Thumbnail))
+            {
+                <img src="~/assets/profile.png" class="img-fluid img-thumbnail p-md-2">
+            }
+            else
+            {
+                <img src="~/assets/testimonial/@Model.Thumbnail" class="img-fluid img-thumbnail p-md-2">
+            }
+        </div>
+        <div class="col-md-8">
+            <div class="row">
+                <div class="p-md-3">
+                    <h6>Description</h6>
+                    <p>
+                        @Model.Description
+                    </p>
+                </div>
+                <div class="p-md-3">
+                    <label class="fw-bold">Rate<i class="fa-solid fa-arrow-right ms-2 me-2"></i></label>
+                    <span>@Model.Rate</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row mt-5 d-flex justify-content-center">
+        <a asp-action="Edit" asp-route-id="@Model?.Id" class="btn btn-sm create-button w-25 me-5"><i class="fa-regular fa-pen-to-square"></i><span class="ms-2">Edit</span></a>
+    </div>
+</div>

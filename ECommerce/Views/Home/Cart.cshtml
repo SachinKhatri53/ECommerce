@@ -1,0 +1,91 @@
+﻿@{
+    ViewData["Title"] = "Cart";
+}
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model List<CartItem>
+@if (ViewBag.CartQuantity > 0)
+{
+    <div class="container-fluid">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#" class="text-decoration-none fw-bold">Home</a></li>
+                <li class="breadcrumb-item fw-bold text-primray">Product</li>
+                <li class="breadcrumb-item active" aria-current="page">cart</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="container">
+        <div class="row">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Product Id</th>
+                        <th>Product Name</th>
+                        <th>Price</th>
+                        <th colspan="2">Quantity</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+
+                        <tr>
+                            <td>@item.ProductId</td>
+                            <td>@item.ProductName</td>
+                            <td>@item.Price</td>
+                            <td>
+                                <button id="decrease-cart-item-button" class="btn btn-sm btn-secondary" @if (item.Quantity == 1)
+                                {
+                                    <text>disabled</text>
+                                } onclick="updateQuantity(@item.ProductId, 'decrease', @item.AvailableStock)">-</button>
+                                <span id="product-quantity-@item.ProductId">@item.Quantity</span>
+                                <button id="increase-cart-item-button" class="btn btn-sm btn-secondary" @if (item.AvailableStock == 0)
+                                {
+                                    <text>disabled</text>
+                                } onclick="updateQuantity(@item.ProductId, 'increase', @item.AvailableStock)">+</button>
+                                <span id="available-stock">Available: @item.AvailableStock</span>
+                            </td>
+                            <td>
+                                <!-- Button for removing the item -->
+                                <button class="btn btn-sm btn-light" onclick="removeItem(@item.ProductId)"><i class="fa-solid fa-trash text-danger me-2"></i></button>
+                            </td>
+                            <td>@(item.Price * item.Quantity)</td>
+                        </tr>
+                    }
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4"></td>
+                        <th>Grand Total:</th>
+                        <td id="grand-total">@Model.Sum(item => item.Price * item.Quantity)</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <div class="row">
+            <div class="col d-flex justify-content-center">
+                <button class="btn btn-danger" onclick="clearCart()"><i class="fa-solid fa-broom me-2"></i>Clear Cart</button>
+            </div>
+            <div class="col d-flex justify-content-center">
+                <a asp-action="Index" asp-controller="Checkout" class="btn btn-success"><i class="fa-solid fa-arrow-right-from-bracket me-2"></i>Proceed To Check Out</a>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="container-fluid">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#" class="text-decoration-none fw-bold">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">cart</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="container">
+        <p class="text-secondary text-center">Your cart is empty.</p>
+    </div>
+}
